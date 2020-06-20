@@ -24,5 +24,5 @@
 
 ![Configurar e navegar pelo console do h2](https://raw.githubusercontent.com/leonardofa/themoviedb-clone/master/readme/resource/img/h2-console.png)
 
-2. Para facilitar (ou não) pode ser usado o [docker](https://docs.docker.com/get-docker/) para criar um banco:
+2. Para facilitar pode ser usado (ou não) o [docker](https://docs.docker.com/get-docker/) para criar um banco:
 `docker run --name mysql-moviedb-clone -p 3306:3306 -e MYSQL_ROOT_PASSWORD=docker -d mysql`
