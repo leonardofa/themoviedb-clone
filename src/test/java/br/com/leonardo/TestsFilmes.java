@@ -4,10 +4,18 @@ import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class ThemoviedbCloneApplicationTests {
+class TestsFilmes {
 
 	@Test
-	void contextLoads() {
+	void criaUsuario() {
 	}
-
+	
+	@Test
+	void naoPermiteCriarUsuarioEmailJaUsado() {
+	}
+	
+	@Test
+	void permiteAlterarNomeUsuario() {
+	}
+	
 }

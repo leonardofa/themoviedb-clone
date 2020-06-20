@@ -17,6 +17,7 @@
 * Comenatários no código para para complementar entendimento
 
 ### 3. Implementações (dominíos):
+* Usuário: usuário do api (autenticação jwt)
 
 
 ### 4. Configurações:
