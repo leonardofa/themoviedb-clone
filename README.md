@@ -19,12 +19,16 @@
 * Rest Client com [insomnia](https://insomnia.rest/download/)
 * ~~Autenticação JWT~~
 
-### 3. Implementações de testes:
+### 3. Implementações de entidades e testes:
 | Domain  | feature | teste|
 |--|--|--|
 | Usuario | incluir |deveValidarCamposUsuarioCadastro|
 | Usuario | incluir |deveCadastrarNovoUsuario|
 | Usuario | incluir |naoDeveCadastrarUsuarioComEmailJaCadastrado|
+| Ator |  |  |
+| Filme |  |  |
+| Serie |  |  |
+| Episodio |  |  |
 
 ### 4. Configurações:
 1. Navegar pelo console do h2
