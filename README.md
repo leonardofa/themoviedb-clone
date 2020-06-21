@@ -35,3 +35,7 @@
 1. Navegar pelo console do h2
 **http://localhost:8080/h2-console** 
 ![Configurar e navegar pelo console do h2](https://raw.githubusercontent.com/leonardofa/themoviedb-clone/master/readme/resource/img/h2-console.png)
+
+2. Modelo relacional do banco
+![MER do TheMovieDB - CLONE](https://raw.githubusercontent.com/leonardofa/themoviedb-clone/master/readme/resource/img/mer.png)
+
