@@ -1,7 +1,18 @@
+aplicacao:
+  nome: '@project.name@'
+  descricao: '@project.description@'
+  versao: '@project.version@'
+  jwt:
+    validity: 18000
+    secret: leonardo
+  
 spring:
+  h2:
+    console:
+      enabled: true
       
   datasource:
-    url: jdbc:h2:mem:themoviedbclonetest
+    url: jdbc:h2:mem:themoviedbcloneteste
     username: h2
     password:
 #    url: jdbc:mysql://localhost/themoviedb_clone_teste?createDatabaseIfNotExist=true&serverTimezone=UTC

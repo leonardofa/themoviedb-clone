@@ -1,4 +1,4 @@
-package br.com.leonardo.api.service;
+package br.com.leonardo.service;
 
 import org.springframework.stereotype.Service;
 import org.springframework.web.context.annotation.RequestScope;

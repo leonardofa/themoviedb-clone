@@ -1,4 +1,4 @@
-package br.com.leonardo.api.handler.exception;
+package br.com.leonardo.api.handler;
 
 import java.time.LocalDateTime;
 import java.util.Collection;

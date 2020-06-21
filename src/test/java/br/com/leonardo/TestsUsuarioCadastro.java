@@ -15,7 +15,7 @@ import org.springframework.http.HttpStatus;
 
 import com.github.javafaker.Faker;
 
-import br.com.leonardo.api.handler.exception.Error;
+import br.com.leonardo.api.handler.Error;
 import br.com.leonardo.domain.usuario.Usuario;
 import br.com.leonardo.domain.usuario.UsuarioRepository;
 import lombok.extern.slf4j.Slf4j;

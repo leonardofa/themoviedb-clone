@@ -1,4 +1,4 @@
-package br.com.leonardo.api.handler.exception;
+package br.com.leonardo.api.handler;
 
 import lombok.Builder;
 import lombok.Data;

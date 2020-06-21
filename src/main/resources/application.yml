@@ -2,9 +2,9 @@ aplicacao:
   nome: '@project.name@'
   descricao: '@project.description@'
   versao: '@project.version@'
-  jwt:
-    validity: 18000
-    secret: leonardo
+#  jwt:
+#    validity: 18000
+#    secret: leonardo
   
 spring:
   h2:
@@ -24,9 +24,8 @@ spring:
     properties:
       hibernate:
         format_sql: true
-        
   flyway:
-    enabled: false
+    enabled: true
   
   
   
