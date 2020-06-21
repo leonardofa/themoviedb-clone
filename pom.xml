@@ -12,7 +12,7 @@
 	<groupId>br.com.leonardo.poc</groupId>
 	<artifactId>themoviedb-clone</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>themoviedb-clone</name>
+	<name>THE MOVIEDB - CLONE</name>
 	<description>Projeto de estudo JAVA (API)</description>
 
 	<properties>
@@ -73,6 +73,10 @@
 			<artifactId>lombok</artifactId>
 			<optional>true</optional>
 		</dependency>
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+		</dependency>
 
 		<!-- TEST -->
 		<dependency>
@@ -85,6 +89,12 @@
 					<artifactId>junit-vintage-engine</artifactId>
 				</exclusion>
 			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>com.github.javafaker</groupId>
+			<artifactId>javafaker</artifactId>
+			<version>1.0.2</version>
+			<scope>test</scope>
 		</dependency>
 
 	</dependencies>

@@ -1,3 +1,4 @@
+
 # The MovieDB - CLONE
 🎥 [BASE DE EXEMPLO](https://developers.themoviedb.org/3) 🇧🇷
 
@@ -7,23 +8,25 @@
 * Testes
 
 ### 2. Techs e stacks a serem usadas:
-* Banco de Dev e Teste: H2 (console H2 habilitado em http://localhost:8080/h2-console. Vide item 4.1)
-* Banco futuro para staging: Mysql (criação com docker vide item 4.2)
-* Flyway para migrations
-* Lombok: menos verbosidade das classes
-* Swagger para documentação dos endpoints
-* Testes unitários e ou de integração com banco (Junit e Mockito)
 * Repositório Git
-* Comenatários no código para para complementar entendimento
+* Banco de Dev e Teste: H2 (console H2 habilitado em Vide item 4.1)
+* Flyway para migrations
+* Lombok para diminuir verbosidade das classes
+* Testes unitários e ou de integração com banco (JUnit e Mockito)
+* Valores dinâmicos para testes com [java-faker](https://java-faker.herokuapp.com/)
+* Swagger para documentação dos endpoints em http://localhost:8080/swagger-ui.html
+* Handlers para validação e erros de negocio (Básico)
+* Rest Client com [insomnia](https://insomnia.rest/download/)
+* ~~Autenticação JWT~~
 
-### 3. Implementações (dominíos):
-* Usuário: usuário do api (autenticação jwt)
-
+### 3. Implementações de testes:
+| Domain  | feature | teste|
+|--|--|--|
+| Usuario | incluir |deveValidarCamposUsuarioCadastro|
+| Usuario | incluir |deveCadastrarNovoUsuario|
+| Usuario | incluir |naoDeveCadastrarUsuarioComEmailJaCadastrado|
 
 ### 4. Configurações:
-1. Configurar e navegar pelo console do h2
-
+1. Navegar pelo console do h2
+**http://localhost:8080/h2-console** 
 ![Configurar e navegar pelo console do h2](https://raw.githubusercontent.com/leonardofa/themoviedb-clone/master/readme/resource/img/h2-console.png)
-
-2. Para facilitar pode ser usado (ou não) o [docker](https://docs.docker.com/get-docker/) para criar um banco:
-`docker run --name mysql-moviedb-clone -p 3306:3306 -e MYSQL_ROOT_PASSWORD=docker -d mysql`

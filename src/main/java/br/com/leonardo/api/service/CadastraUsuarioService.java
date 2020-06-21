@@ -13,15 +13,16 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class CadastraUsuarioService {
 
-  private final UsuarioRepository usuarioRepository;
+  private final UsuarioRepository repository;
 
   public Usuario execute(final Usuario usuario) {
-    final var usuarioEncontrado = usuarioRepository.findByEmail(usuario.getEmail());
-    if (usuarioEncontrado.isPresent()) {
-      throw new EmailJaCadastradoException();
-    }
+    final var usuarioEncontrado = repository.findByEmail(usuario.getEmail());
     
-    return usuarioRepository.save(usuario);
+    if (usuarioEncontrado.isPresent()) {
+      throw new EmailJaCadastradoException(usuario.getEmail());
+    }
+
+    return repository.save(usuario);
   }
 
 }

@@ -9,8 +9,8 @@ public class EmailJaCadastradoException extends NegocioException {
    */
   private static final long serialVersionUID = 1L;
 
-  public EmailJaCadastradoException() {
-    super(HttpStatus.BAD_REQUEST, "Email já está cadastrado");
+  public EmailJaCadastradoException(String email) {
+    super(HttpStatus.BAD_REQUEST, "Email já está cadastrado: " + email);
   }
 
 }

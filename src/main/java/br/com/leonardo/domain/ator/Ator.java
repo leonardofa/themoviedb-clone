@@ -1,8 +1,10 @@
-package br.com.leonardo.domain.usuario;
+package br.com.leonardo.domain.ator;
+
+import java.time.LocalDate;
 
 import javax.persistence.Entity;
-import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import br.com.leonardo.entity.EntityBase;
@@ -13,17 +15,15 @@ import lombok.EqualsAndHashCode;
 @Data
 @EqualsAndHashCode(callSuper = false)
 @Entity
-public class Usuario extends EntityBase {
+public class Ator extends EntityBase {
 
-  @ApiModelProperty(value = "Nome do usuário")
+  @ApiModelProperty(value = "Nome do Ator")
   @NotBlank
   @Size(min = 3, max = 60)
   private String nome;
 
-  @ApiModelProperty(value = "Email do usuário")
-  @NotBlank
-  @Email
-  @Size(min = 3, max = 255)
-  private String email;
+  @ApiModelProperty(value = "Data de nascimento do Ator")
+  @NotNull
+  private LocalDate nascimento;
 
 }
