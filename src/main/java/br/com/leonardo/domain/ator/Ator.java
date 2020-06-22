@@ -5,11 +5,11 @@ import java.time.LocalDate;
 import javax.persistence.Entity;
 
 import br.com.leonardo.entity.BaseEntity;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
-@EqualsAndHashCode(callSuper = false)
+@Getter
+@Setter
 @Entity
 public class Ator extends BaseEntity {
 

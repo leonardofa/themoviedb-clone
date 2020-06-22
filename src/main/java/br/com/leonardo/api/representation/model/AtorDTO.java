@@ -8,11 +8,11 @@ import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 
 import br.com.leonardo.api.representation.BaseDTO;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
-@EqualsAndHashCode(callSuper = false)
+@Getter
+@Setter
 public class AtorDTO extends BaseDTO {
 
   @NotBlank

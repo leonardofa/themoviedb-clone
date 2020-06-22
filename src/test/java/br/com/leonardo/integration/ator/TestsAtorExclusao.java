@@ -2,6 +2,8 @@ package br.com.leonardo.integration.ator;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.util.Arrays;
 import java.util.stream.Collectors;
@@ -17,6 +19,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.annotation.DirtiesContext;
 
+import br.com.leonardo.api.handler.Error;
 import br.com.leonardo.domain.ator.AtorRepository;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
@@ -50,6 +53,17 @@ public class TestsAtorExclusao {
 
     final var ator = repository.findById(id);
     assertFalse(ator.isPresent());
+  }
+  
+  @Test
+  void naoDeveExcluirAtorNaoEncontrado() {
+    final var id = "identificador";
+    final var response = restTemplate.exchange(getPath("{id}"), HttpMethod.DELETE, null, Error.class, id);
+    assertNotNull(response);
+    assertTrue(
+        response.getBody().getStatus().equals(HttpStatus.NOT_FOUND)
+        && response.getBody().getTitulo().contains("Ator não encontrado")
+    );
   }
 
 }

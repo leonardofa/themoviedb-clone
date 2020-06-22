@@ -6,13 +6,13 @@ import javax.validation.constraints.Size;
 
 import br.com.leonardo.api.representation.BaseDTO;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
-@EqualsAndHashCode(callSuper = false)
+@Getter
+@Setter
 public class UsuarioDTO extends BaseDTO {
-  
+
   @ApiModelProperty(value = "Nome do usuário")
   @NotBlank
   @Size(min = 3, max = 128)

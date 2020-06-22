@@ -11,10 +11,12 @@ import com.fasterxml.jackson.annotation.JsonProperty.Access;
 
 import br.com.leonardo.api.handler.ValidationGroups;
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 @JsonInclude(Include.NON_NULL)
-@Data
 public class BaseDTO {
 
   @NotBlank(groups = ValidationGroups.Id.class)

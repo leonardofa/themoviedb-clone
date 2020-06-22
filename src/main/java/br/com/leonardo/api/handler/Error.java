@@ -10,9 +10,9 @@ import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 
-@Data
+@Getter
 @Builder
 @JsonInclude(Include.NON_NULL)
 @JsonPropertyOrder({ "code", "status", "titulo", "momento" })
@@ -24,7 +24,7 @@ public class Error {
 
   private final String titulo; 
   
-  private Collection<ErrorCampo> campos;
+  private final Collection<ErrorCampo> campos;
 
   public int getCode() {
     return status.value();

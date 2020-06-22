@@ -5,11 +5,11 @@ import javax.persistence.ManyToOne;
 
 import br.com.leonardo.domain.serie.Serie;
 import br.com.leonardo.entity.FilmeBaseEntity;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
-@EqualsAndHashCode(callSuper = false)
+@Getter
+@Setter
 @Entity
 public class Episodio extends FilmeBaseEntity {
 

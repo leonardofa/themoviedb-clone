@@ -1,9 +1,9 @@
 package br.com.leonardo.api.handler;
 
 import lombok.Builder;
-import lombok.Data;
+import lombok.Getter;
 
-@Data
+@Getter
 @Builder
 public class ErrorCampo {
 

@@ -32,10 +32,6 @@ public abstract class MapperRest<M extends BaseEntity, R extends BaseDTO> {
     return modelMapper.map(dto, getModelClass());
   }
 
-  protected List<M> toModel(List<R> dtoList) {
-    return dtoList.stream().map(dto -> toModel(dto)).collect(Collectors.toList());
-  }
-
   protected R fromModel(M model) {
     return modelMapper.map(model, getRepresentationClass());
   }

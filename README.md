@@ -21,6 +21,7 @@
 * Handlers para validação e erros de negocio (Básico)
 * Rest Client com [insomnia](https://insomnia.rest/download/)
 * Script com Docker para iniciar sem abrir o projeto. Item 4.3
+* Cobertura de código com Jacoco. Item 4.4
 
 ### 3. Implementações de entidades e testes:
 | Domain  | feature | teste|
@@ -29,7 +30,8 @@
 | Usuario | cadastro |deveCadastrarNovoUsuario|
 | Usuario | cadastro |naoDeveCadastrarUsuarioComEmailJaCadastrado|
 | Usuario | atualizacao |deveValidarCamposUsuarioAtualizacao|
-| Usuario | atualizacao |naoDeveAtualizarUsuarioNaoEncontrado|
+| Usuario | atualizacao |deveValidarCamposUsuarioAtualizacao|
+| Usuario | atualizacao |deveAtualizarUmUsuario|
 | Usuario | busca |deveRecuperarTodosUsuarios|
 | Usuario | busca |deveRecuperarSomenteUmUsuario|
 | Usuario | busca |deveRetornarErroQuandoBuscarUsuarioInexistente|
@@ -39,10 +41,12 @@
 | Ator | cadastro |naoDeveCadastraAtorComNomeeDataNascimentoJaCadastrado|
 | Ator | cadastro |deveCadastrarNovoAtor|
 | Ator | atualizacao |naoDeveAtualizarAtorNaoEncontrado|
+| Ator | atualizacao |deveAtualizaUmAtor|
 | Ator | busca |deveRecuperarTodosAtores|
 | Ator | busca |deveRecuperarSomenteUmAtor|
 | Ator | busca |deveRetornarErroQuandoBuscarAtorInexistente|
 | Ator | exclusao |deveExcluirUmAtor|
+| Ator | exclusao |naoDeveExcluirAtorNaoEncontrado|
 
 ### 4. Configurações:
 1. Navegar pelo console do h2
@@ -56,3 +60,5 @@
 - [ ] Java 11
 - [ ] Docker
 - [ ] Linux ou converter para bath
+
+4. Cobertura de código nos testes com Jacoco. Relatório pode ser visto em: target/site/jacoco/index.html

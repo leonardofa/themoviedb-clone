@@ -18,17 +18,10 @@ public class AtualizaUsuarioService {
   private final UsuarioRepository repository;
 
   public Usuario execute(final Usuario usuario) {
-
-    try {
-      final var usuarioEncontrado = repository.findById(usuario.getId())
-          .orElseThrow(() -> new UsuarioNaoEncontradoException());
-      
-      usuario.setCadastro(usuarioEncontrado.getCadastro());
-      usuario.setAtualizacao(OffsetDateTime.now());
-    } catch (IllegalArgumentException e) {
-      throw new UsuarioNaoEncontradoException();
-    }
-
+    final var usuarioEncontrado = repository.findById(usuario.getId())
+        .orElseThrow(() -> new UsuarioNaoEncontradoException());
+    usuario.setCadastro(usuarioEncontrado.getCadastro());
+    usuario.setAtualizacao(OffsetDateTime.now());
     return repository.save(usuario);
   }
 

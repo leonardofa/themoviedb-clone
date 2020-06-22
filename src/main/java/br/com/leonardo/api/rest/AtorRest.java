@@ -98,7 +98,8 @@ public class AtorRest extends MapperRest<Ator, AtorDTO> {
   @DeleteMapping("{id}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
   public void delete(@PathVariable("id") String id) {
-    repository.delete(repository.findById(id).orElseThrow(() -> new AtorNaoEncontradoException()));
+    final var ator = repository.findById(id).orElseThrow(() -> new AtorNaoEncontradoException());
+    repository.delete(ator);
   }
 
 

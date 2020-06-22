@@ -2,11 +2,11 @@ package br.com.leonardo.domain.exception;
 
 import org.springframework.http.HttpStatus;
 
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
-@EqualsAndHashCode(callSuper = false)
+@Getter
+@Setter
 public class NegocioException extends RuntimeException {
 
   /**

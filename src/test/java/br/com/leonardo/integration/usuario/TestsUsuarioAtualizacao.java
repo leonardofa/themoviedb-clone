@@ -19,10 +19,14 @@ import com.github.javafaker.Faker;
 
 import br.com.leonardo.api.handler.Error;
 import br.com.leonardo.api.representation.model.UsuarioDTO;
+import br.com.leonardo.domain.usuario.UsuarioRepository;
 
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 public class TestsUsuarioAtualizacao {
+  
+  @Autowired
+  private UsuarioRepository repository;
 
   @Autowired
   private TestRestTemplate restTemplate;
@@ -58,5 +62,24 @@ public class TestsUsuarioAtualizacao {
     assertTrue(response.getBody().getStatus().equals(HttpStatus.NOT_FOUND)
         && response.getBody().getTitulo().contains("Usuário não encontrado"));
   }
+  
+  @Test
+  void deveAtualizarUmUsuario() {
+    Faker faker = new Faker();
+    final var name = faker.name().fullName();
+    
+    final var usuario = repository.findAll().get(0);
+    
+    final var usuarioModificado = new UsuarioDTO();
+    usuarioModificado.setId(usuario.getId());
+    usuarioModificado.setNome(name);
+    usuarioModificado.setEmail(usuario.getEmail());
+    
+    var response = restTemplate.exchange(getPath(), HttpMethod.PUT, new HttpEntity<>(usuarioModificado), UsuarioDTO.class);
+    
+    assertTrue(response.getStatusCode().equals(HttpStatus.OK) && response.getBody().getNome().equals(name));
+  }
+  
+  
 
 }

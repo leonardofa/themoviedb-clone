@@ -3,11 +3,11 @@ package br.com.leonardo.domain.filme;
 import javax.persistence.Entity;
 
 import br.com.leonardo.entity.FilmeBaseEntity;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
-@EqualsAndHashCode(callSuper = false)
+@Getter
+@Setter
 @Entity
 public class Filme extends FilmeBaseEntity {
 }

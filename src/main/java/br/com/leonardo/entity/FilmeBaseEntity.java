@@ -7,11 +7,11 @@ import javax.persistence.ManyToMany;
 import javax.persistence.MappedSuperclass;
 
 import br.com.leonardo.domain.ator.Ator;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
-@EqualsAndHashCode(callSuper = false)
+@Getter
+@Setter
 @MappedSuperclass
 public abstract class FilmeBaseEntity extends BaseEntity {
 
@@ -25,6 +25,5 @@ public abstract class FilmeBaseEntity extends BaseEntity {
   
   @ManyToMany
   private List<Ator> atores;
-  
 
 }
