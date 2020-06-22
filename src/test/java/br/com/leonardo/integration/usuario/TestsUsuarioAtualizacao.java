@@ -1,4 +1,4 @@
-package br.com.leonardo;
+package br.com.leonardo.integration.usuario;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
@@ -40,7 +40,7 @@ public class TestsUsuarioAtualizacao {
   }
   
   private void deveValidarCamposObrigatorios() {
-    var response = restTemplate.postForEntity(getPath(), new UsuarioDTO(), Error.class);
+    var response = restTemplate.exchange(getPath(), HttpMethod.PUT, new HttpEntity<>(new UsuarioDTO()), Error.class);
     assertNotNull(response);
     assertNotNull(response.getBody());
     assertEquals(response.getBody().getStatus(), HttpStatus.BAD_REQUEST);

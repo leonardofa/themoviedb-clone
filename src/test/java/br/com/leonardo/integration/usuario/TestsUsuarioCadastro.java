@@ -1,4 +1,4 @@
-package br.com.leonardo;
+package br.com.leonardo.integration.usuario;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;

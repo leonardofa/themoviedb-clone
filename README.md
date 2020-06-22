@@ -25,11 +25,22 @@
 ### 3. Implementações de entidades e testes:
 | Domain  | feature | teste|
 |--|--|--|
-| Usuario | incluir |deveValidarCamposUsuarioCadastro|
-| Usuario | incluir |deveCadastrarNovoUsuario|
-| Usuario | incluir |naoDeveCadastrarUsuarioComEmailJaCadastrado|
-| Usuario | alterar |deveValidarCamposUsuarioAtualizacao|
-| Usuario | alterar |naoDeveAtualizarUsuarioNaoEncontrado|
+| Usuario | cadastro |deveValidarCamposUsuarioCadastro|
+| Usuario | cadastro |deveCadastrarNovoUsuario|
+| Usuario | cadastro |naoDeveCadastrarUsuarioComEmailJaCadastrado|
+| Usuario | atualizacao |deveValidarCamposUsuarioAtualizacao|
+| Usuario | atualizacao |naoDeveAtualizarUsuarioNaoEncontrado|
+| Usuario | busca |deveRecuperarTodosUsuarios|
+| Usuario | busca |deveRecuperarSomenteUmUsuarios|
+| Usuario | busca |deveRetornarErroQuandoBuscarUsuarioInexistente|
+| Usuario | exclusao |deveExcluirUmUsuario|
+| Usuario | exclusao |naoDeveEscluirUsuarioNaoEncontrado|
+| Ator | cadastro |deveValidarCamposAtorCadastro|
+| Ator | cadastro |naoDeveCadastraAtorComNomeeDataNascimentoJaCadastrado|
+| Ator | cadastro |deveCadastrarNovoAtor|
+| Filme |   |   |
+| Serie |   |   |
+| Episodio |   |   |
 
 ### 4. Configurações:
 1. Navegar pelo console do h2

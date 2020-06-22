@@ -5,6 +5,7 @@ import java.util.List;
 import javax.validation.Valid;
 
 import org.springframework.http.HttpStatus;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -36,15 +37,13 @@ public class UsuarioRest extends MapperRest<Usuario, UsuarioDTO> {
   private final UsuarioRepository usuarioRepository;
 
   private final CadastraUsuarioService cadastraUsuarioService;
-  
+
   private final AtualizaUsuarioService atualizaUsuarioService;
 
   @ApiOperation(value = "Cria um usuário da API")
-  @ApiResponses(value = {
-      @ApiResponse(code = 201, message = "Cria e retorna um Usuário"),
+  @ApiResponses(value = { @ApiResponse(code = 201, message = "Cria e retorna um Usuário"),
       @ApiResponse(code = 400, message = "Erros negociais: validações da dados e fluxo", response = Error.class),
-      @ApiResponse(code = 500, message = "Erros não experados")
-  })
+      @ApiResponse(code = 500, message = "Erros não experados") })
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
   public UsuarioDTO create(@Valid @RequestBody UsuarioDTO usuario) {
@@ -53,11 +52,9 @@ public class UsuarioRest extends MapperRest<Usuario, UsuarioDTO> {
   }
 
   @ApiOperation(value = "Retorna todos os usuários identificados")
-  @ApiResponses(value = {
-      @ApiResponse(code = 200, message = "Retorna uma lista de usuários"),
+  @ApiResponses(value = { @ApiResponse(code = 200, message = "Retorna uma lista de usuários"),
       @ApiResponse(code = 400, message = "Erros negociais: validações da dados e fluxo", response = Error.class),
-      @ApiResponse(code = 500, message = "Erros não experados")
-  })
+      @ApiResponse(code = 500, message = "Erros não experados") })
   @GetMapping
   @ResponseStatus(HttpStatus.OK)
   public List<?> readAll() {
@@ -65,11 +62,9 @@ public class UsuarioRest extends MapperRest<Usuario, UsuarioDTO> {
   }
 
   @ApiOperation(value = "Retorna um usuário identificado")
-  @ApiResponses(value = {
-      @ApiResponse(code = 200, message = "Retorna um usuário"),
+  @ApiResponses(value = { @ApiResponse(code = 200, message = "Retorna um usuário"),
       @ApiResponse(code = 400, message = "Erros negociais: validações da dados e fluxo", response = Error.class),
-      @ApiResponse(code = 500, message = "Erros não experados")
-  })
+      @ApiResponse(code = 500, message = "Erros não experados") })
   @GetMapping("{id}")
   @ResponseStatus(HttpStatus.OK)
   public UsuarioDTO readOne(@PathVariable("id") String id) {
@@ -78,16 +73,25 @@ public class UsuarioRest extends MapperRest<Usuario, UsuarioDTO> {
   }
 
   @ApiOperation(value = "Atualiza um usuário identificado")
-  @ApiResponses(value = {
-      @ApiResponse(code = 200, message = "Usuário atualizado"),
+  @ApiResponses(value = { @ApiResponse(code = 200, message = "Usuário atualizado"),
       @ApiResponse(code = 400, message = "Erros negociais: validações da dados e fluxo", response = Error.class),
-      @ApiResponse(code = 500, message = "Erros não experados")
-  })
+      @ApiResponse(code = 500, message = "Erros não experados") })
   @PutMapping
   @ResponseStatus(HttpStatus.OK)
   public UsuarioDTO update(@Valid @RequestBody UsuarioDTO usuario) {
     final var usuarioSalvo = atualizaUsuarioService.execute(toModel(usuario));
     return fromModel(usuarioSalvo);
+  }
+
+  @ApiOperation(value = "Deleta um usuário identificado")
+  @ApiResponses(value = { @ApiResponse(code = 204, message = "Sem conteúdo quando executar"),
+      @ApiResponse(code = 400, message = "Erros negociais: validações da dados e fluxo", response = Error.class),
+      @ApiResponse(code = 500, message = "Erros não experados") })
+  @DeleteMapping("{id}")
+  @ResponseStatus(HttpStatus.NO_CONTENT)
+  public void delete(@PathVariable("id") String id) {
+    final var usuario = usuarioRepository.findById(id).orElseThrow(() -> new UsuarioNaoEncontradoException());
+    usuarioRepository.delete(usuario);
   }
 
 }
