@@ -48,7 +48,7 @@ public class TestsUsuarioCadastro {
 
   private void deveValidarCampoNomeTamanhoUsuarioCadastro() {
     var usuario = new UsuarioDTO();
-    usuario.setNome(StringUtils.leftPad("0", 61));
+    usuario.setNome(StringUtils.leftPad("0", 129));
     var response = restTemplate.postForEntity(getPath(), usuario, Error.class);
     assertNotNull(response);
     assertNotNull(response.getBody());

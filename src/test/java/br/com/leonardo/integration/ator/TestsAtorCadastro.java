@@ -4,6 +4,8 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.time.LocalDate;
+
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,10 +16,8 @@ import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.annotation.DirtiesContext;
 
-import com.github.javafaker.Faker;
-
 import br.com.leonardo.api.handler.Error;
-import br.com.leonardo.api.representation.model.UsuarioDTO;
+import br.com.leonardo.api.representation.model.AtorDTO;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -43,32 +43,34 @@ public class TestsAtorCadastro {
   }
 
   private void deveValidarCampoNomeTamanhoAtorCadastro() {
-    var usuario = new UsuarioDTO();
-    usuario.setNome(StringUtils.leftPad("0", 61));
-    var response = restTemplate.postForEntity(getPath(), usuario, Error.class);
+    final var ator = new AtorDTO();
+    ator.setNome(StringUtils.leftPad("0", 129));
+    var response = restTemplate.postForEntity(getPath(), ator, Error.class);
     assertNotNull(response);
     assertNotNull(response.getBody());
     assertEquals(response.getBody().getStatus(), HttpStatus.BAD_REQUEST);
-    response.getBody().getCampos().stream()
-        .filter(campo -> campo.getNome().equals("nome") && campo.getDescricao().contains("Tamanho inválido"))
-        .findFirst().orElseThrow(() -> new AssertionError());
+    response.getBody().getCampos().stream().filter(
+        campo -> campo.getNome().equals("nome")
+        && campo.getDescricao().contains("Tamanho inválido")
+    ).findFirst().orElseThrow(() -> new AssertionError());
 
   }
 
   private void deveValidarCampoNascimentoAtorCadastro() {
-    var usuario = new UsuarioDTO();
-    usuario.setEmail("emailinvalido");
-    var response = restTemplate.postForEntity(getPath(), usuario, Error.class);
+    final var ator = new AtorDTO();
+    ator.setNascimento(LocalDate.now());
+    var response = restTemplate.postForEntity(getPath(), ator, Error.class);
     assertNotNull(response);
     assertNotNull(response.getBody());
     assertEquals(response.getBody().getStatus(), HttpStatus.BAD_REQUEST);
-    response.getBody().getCampos().stream()
-        .filter(campo -> campo.getNome().equals("email") && campo.getDescricao().contains("inválido")).findFirst()
-        .orElseThrow(() -> new AssertionError());
+    response.getBody().getCampos().stream().filter(
+        campo -> campo.getNome().equals("nascimento")
+        && campo.getDescricao().equals("A data deve ser posterior à hoje")
+    ).findFirst().orElseThrow(() -> new AssertionError());
   }
 
   private void deveValidarCamposObrigatorios() {
-    var response = restTemplate.postForEntity(getPath(), new UsuarioDTO(), Error.class);
+    final var response = restTemplate.postForEntity(getPath(), new AtorDTO(), Error.class);
     assertNotNull(response);
     assertNotNull(response.getBody());
     assertEquals(response.getBody().getStatus(), HttpStatus.BAD_REQUEST);

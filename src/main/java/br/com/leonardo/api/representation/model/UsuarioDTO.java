@@ -15,7 +15,7 @@ public class UsuarioDTO extends BaseDTO {
   
   @ApiModelProperty(value = "Nome do usuário")
   @NotBlank
-  @Size(min = 3, max = 60)
+  @Size(min = 3, max = 128)
   private String nome;
 
   @ApiModelProperty(value = "Email do usuário")
