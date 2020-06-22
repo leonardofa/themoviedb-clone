@@ -16,82 +16,80 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.leonardo.api.handler.Error;
-import br.com.leonardo.api.representation.model.UsuarioDTO;
-import br.com.leonardo.domain.exception.UsuarioNaoEncontradoException;
-import br.com.leonardo.domain.usuario.Usuario;
-import br.com.leonardo.domain.usuario.UsuarioRepository;
-import br.com.leonardo.service.AtualizaUsuarioService;
-import br.com.leonardo.service.CadastraUsuarioService;
+import br.com.leonardo.api.representation.model.AtorDTO;
+import br.com.leonardo.domain.ator.Ator;
+import br.com.leonardo.domain.ator.AtorRepository;
+import br.com.leonardo.domain.exception.AtorNaoEncontradoException;
+import br.com.leonardo.service.AtualizaAtorService;
+import br.com.leonardo.service.CadastraAtorService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import lombok.RequiredArgsConstructor;
 
-@Api(tags = { "Operações de Usuários" })
+@Api(tags = { "Operações de Atores" })
 @RestController
-@RequestMapping("usuarios")
+@RequestMapping("atores")
 @RequiredArgsConstructor
-public class UsuarioRest extends MapperRest<Usuario, UsuarioDTO> {
+public class AtorRest extends MapperRest<Ator, AtorDTO> {
 
-  private final UsuarioRepository repository;
+  private final AtorRepository repository;
 
-  private final CadastraUsuarioService cadastraUsuarioService;
+  private final CadastraAtorService cadastraAtorService;
+  
+  private final AtualizaAtorService atualizaAtorService;
 
-  private final AtualizaUsuarioService atualizaUsuarioService;
-
-  @ApiOperation(value = "Cria um usuário da API")
+  @ApiOperation(value = "Cria um ator")
   @ApiResponses(value = {
-      @ApiResponse(code = 201, message = "Cria e retorna um Usuário", response = UsuarioDTO.class),
+      @ApiResponse(code = 201, message = "Cria e retorna um Ator", response = AtorDTO.class),
       @ApiResponse(code = 400, message = "Erros negociais: validações da dados e fluxo", response = Error.class),
       @ApiResponse(code = 500, message = "Erros não experados")
   })
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
-  public UsuarioDTO create(@Valid @RequestBody UsuarioDTO usuario) {
-    final var usuarioCriado = cadastraUsuarioService.execute(toModel(usuario));
-    return fromModel(usuarioCriado);
+  public AtorDTO create(@Valid @RequestBody AtorDTO ator) {
+    final var atorCriado = cadastraAtorService.execute(toModel(ator));
+    return fromModel(atorCriado);
   }
 
-  @ApiOperation(value = "Retorna todos os usuários")
+  @ApiOperation(value = "Retorna todos os atores")
   @ApiResponses(value = {
-      @ApiResponse(code = 200, message = "Retorna uma lista de usuários", response = UsuarioDTO[].class),
+      @ApiResponse(code = 200, message = "Retorna a lista de atores", response = AtorDTO[].class),
       @ApiResponse(code = 400, message = "Erros negociais: validações da dados e fluxo", response = Error.class),
       @ApiResponse(code = 500, message = "Erros não experados")
   })
   @GetMapping
   @ResponseStatus(HttpStatus.OK)
-  public List<UsuarioDTO> readAll() {
+  public List<AtorDTO> readAll() {
     return fromModel(repository.findAll());
   }
 
-  @ApiOperation(value = "Retorna um usuário")
+  @ApiOperation(value = "Retorna um ator")
   @ApiResponses(value = {
-      @ApiResponse(code = 200, message = "Retorna um usuário", response =  UsuarioDTO.class),
+      @ApiResponse(code = 200, message = "Retorna um ator", response = AtorDTO.class),
       @ApiResponse(code = 400, message = "Erros negociais: validações da dados e fluxo", response = Error.class),
       @ApiResponse(code = 500, message = "Erros não experados")
   })
   @GetMapping("{id}")
   @ResponseStatus(HttpStatus.OK)
-  public UsuarioDTO readOne(@PathVariable("id") String id) {
-    final var usuario = repository.findById(id).orElseThrow(() -> new UsuarioNaoEncontradoException());
-    return fromModel(usuario);
+  public AtorDTO readOne(@PathVariable("id") String id) {
+    return fromModel(repository.findById(id).orElseThrow(() -> new AtorNaoEncontradoException()));
   }
 
-  @ApiOperation(value = "Atualiza um usuário")
+  @ApiOperation(value = "Atualiza um ator")
   @ApiResponses(value = {
-      @ApiResponse(code = 200, message = "Retorna o usuário atualizado", response = UsuarioDTO.class),
+      @ApiResponse(code = 200, message = "Ator atualizado", response = AtorDTO.class),
       @ApiResponse(code = 400, message = "Erros negociais: validações da dados e fluxo", response = Error.class),
       @ApiResponse(code = 500, message = "Erros não experados")
   })
   @PutMapping
   @ResponseStatus(HttpStatus.OK)
-  public UsuarioDTO update(@Valid @RequestBody UsuarioDTO usuario) {
-    final var usuarioSalvo = atualizaUsuarioService.execute(toModel(usuario));
-    return fromModel(usuarioSalvo);
+  public AtorDTO update(@Valid @RequestBody AtorDTO ator) {
+    return fromModel(atualizaAtorService.execute(toModel(ator)));
   }
 
-  @ApiOperation(value = "Deleta um usuário")
+  @ApiOperation(value = "Deleta um ator")
   @ApiResponses(value = {
       @ApiResponse(code = 204, message = "Resposta sem conteúdo"),
       @ApiResponse(code = 400, message = "Erros negociais: validações da dados e fluxo", response = Error.class),
@@ -100,8 +98,8 @@ public class UsuarioRest extends MapperRest<Usuario, UsuarioDTO> {
   @DeleteMapping("{id}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
   public void delete(@PathVariable("id") String id) {
-    final var usuario = repository.findById(id).orElseThrow(() -> new UsuarioNaoEncontradoException());
-    repository.delete(usuario);
+    repository.delete(repository.findById(id).orElseThrow(() -> new AtorNaoEncontradoException()));
   }
+
 
 }

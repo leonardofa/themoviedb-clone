@@ -53,7 +53,7 @@ public class TestsUsuarioBuscas {
   }
 
   @Test
-  void deveRecuperarSomenteUmUsuarios() {
+  void deveRecuperarSomenteUmUsuario() {
     final var id = usuarioRepository.findAll().get(0).getId();
     final var response = restTemplate.getForEntity(getPath("{id}"), JsonNode.class, id);
     assertNotNull(response);

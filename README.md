@@ -31,16 +31,18 @@
 | Usuario | atualizacao |deveValidarCamposUsuarioAtualizacao|
 | Usuario | atualizacao |naoDeveAtualizarUsuarioNaoEncontrado|
 | Usuario | busca |deveRecuperarTodosUsuarios|
-| Usuario | busca |deveRecuperarSomenteUmUsuarios|
+| Usuario | busca |deveRecuperarSomenteUmUsuario|
 | Usuario | busca |deveRetornarErroQuandoBuscarUsuarioInexistente|
 | Usuario | exclusao |deveExcluirUmUsuario|
 | Usuario | exclusao |naoDeveEscluirUsuarioNaoEncontrado|
 | Ator | cadastro |deveValidarCamposAtorCadastro|
 | Ator | cadastro |naoDeveCadastraAtorComNomeeDataNascimentoJaCadastrado|
 | Ator | cadastro |deveCadastrarNovoAtor|
-| Filme |   |   |
-| Serie |   |   |
-| Episodio |   |   |
+| Ator | atualizacao |naoDeveAtualizarAtorNaoEncontrado|
+| Ator | busca |deveRecuperarTodosAtores|
+| Ator | busca |deveRecuperarSomenteUmAtor|
+| Ator | busca |deveRetornarErroQuandoBuscarAtorInexistente|
+| Ator | exclusao |deveExcluirUmAtor|
 
 ### 4. Configurações:
 1. Navegar pelo console do h2

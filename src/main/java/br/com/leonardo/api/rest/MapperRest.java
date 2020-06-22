@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import br.com.leonardo.api.representation.BaseDTO;
 import br.com.leonardo.entity.BaseEntity;
 
-public class MapperRest<M extends BaseEntity, R extends BaseDTO> {
+public abstract class MapperRest<M extends BaseEntity, R extends BaseDTO> {
 
   @Autowired
   private ModelMapper modelMapper;

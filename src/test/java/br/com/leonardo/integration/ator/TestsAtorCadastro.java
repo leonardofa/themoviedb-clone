@@ -5,6 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.time.LocalDate;
+import java.time.ZoneId;
 
 import org.apache.commons.lang3.StringUtils;
 import org.junit.jupiter.api.Test;
@@ -16,14 +17,18 @@ import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
 import org.springframework.test.annotation.DirtiesContext;
 
+import com.github.javafaker.Faker;
+
 import br.com.leonardo.api.handler.Error;
 import br.com.leonardo.api.representation.model.AtorDTO;
-import lombok.extern.slf4j.Slf4j;
+import br.com.leonardo.domain.ator.AtorRepository;
 
-@Slf4j
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
 @DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 public class TestsAtorCadastro {
+  
+  @Autowired
+  private AtorRepository repository;
 
   @Autowired
   private TestRestTemplate restTemplate;
@@ -74,18 +79,34 @@ public class TestsAtorCadastro {
     assertNotNull(response);
     assertNotNull(response.getBody());
     assertEquals(response.getBody().getStatus(), HttpStatus.BAD_REQUEST);
-    response.getBody().getCampos().forEach(campo -> log.info(campo.toString()));
-    assertTrue(response.getBody().getCampos().stream().allMatch(campo -> campo.getDescricao().contains("obrigatório")));
+    assertTrue(
+      response.getBody().getCampos().stream().allMatch(
+          campo -> campo.getDescricao().contains("obrigatório")
+      )
+    );
   }
 
   @Test
   void deveCadastrarNovoAtor() {
-    assertTrue(false);
+    final Faker faker = new Faker();
+    final var ator = new AtorDTO();
+    ator.setNome(faker.name().fullName());
+    ator.setNascimento(LocalDate.ofInstant(faker.date().birthday().toInstant(), ZoneId.systemDefault()));
+    var response = restTemplate.postForEntity(getPath(), ator, AtorDTO.class);
+    assertNotNull(response);
+    assertEquals(response.getStatusCode(), HttpStatus.CREATED);
+    assertNotNull(response.getBody().getId());
   }
 
   @Test
   void naoDeveCadastraAtorComNomeeDataNascimentoJaCadastrado() {
-    assertTrue(false);
+    final var ator = repository.findAll().get(0);
+    var response = restTemplate.postForEntity(getPath(), ator, Error.class);
+    assertNotNull(response);
+    assertTrue(
+        response.getBody().getStatus().equals(HttpStatus.BAD_REQUEST)
+        && response.getBody().getTitulo().contains("Ator já está cadastrado")
+    );
   }
 
 }
