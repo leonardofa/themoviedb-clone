@@ -20,7 +20,7 @@
 * Swagger para documentação dos endpoints em http://localhost:8080/swagger-ui.html
 * Handlers para validação e erros de negocio (Básico)
 * Rest Client com [insomnia](https://insomnia.rest/download/)
-* Docker para iniciar sem abrir o projeto. Item 4.3
+* Script com Docker para iniciar sem abrir o projeto. Item 4.3
 
 ### 3. Implementações de entidades e testes:
 | Domain  | feature | teste|
