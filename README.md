@@ -1,4 +1,5 @@
 
+
 # The MovieDB - CLONE
 🎥 [BASE DE EXEMPLO](https://developers.themoviedb.org/3) 🇧🇷
 
@@ -9,7 +10,8 @@
 
 ### 2. Techs e stacks a serem usadas:
 * Repositório Git
-* Banco de Dev e Teste: H2 (console H2 habilitado em Vide item 4.1)
+* Banco de Dev e Teste. Console H2 habilitado. Item 4.1
+* Modelo relacional. Item 4.2
 * Flyway para migrations
 * Lombok para diminuir verbosidade das classes
 * Model Mapper para evitar o boilerplate entre os representation e domain models [java-faker](http://modelmapper.org/)
@@ -18,7 +20,7 @@
 * Swagger para documentação dos endpoints em http://localhost:8080/swagger-ui.html
 * Handlers para validação e erros de negocio (Básico)
 * Rest Client com [insomnia](https://insomnia.rest/download/)
-* ~~Autenticação JWT~~
+* Docker para iniciar sem abrir o projeto. Item 4.3
 
 ### 3. Implementações de entidades e testes:
 | Domain  | feature | teste|
@@ -26,10 +28,8 @@
 | Usuario | incluir |deveValidarCamposUsuarioCadastro|
 | Usuario | incluir |deveCadastrarNovoUsuario|
 | Usuario | incluir |naoDeveCadastrarUsuarioComEmailJaCadastrado|
-| Ator |  |  |
-| Filme |  |  |
-| Serie |  |  |
-| Episodio |  |  |
+| Usuario | alterar |deveValidarCamposUsuarioAtualizacao|
+| Usuario | alterar |naoDeveAtualizarUsuarioNaoEncontrado|
 
 ### 4. Configurações:
 1. Navegar pelo console do h2
@@ -39,3 +39,7 @@
 2. Modelo relacional do banco
 ![MER do TheMovieDB - CLONE](https://raw.githubusercontent.com/leonardofa/themoviedb-clone/master/readme/resource/img/mer.png)
 
+3. O arquivo **start-with-docker.sh** testa, builda e sobe o projeto. Requisitos:
+- [ ] Java 11
+- [ ] Docker
+- [ ] Linux ou converter para bath

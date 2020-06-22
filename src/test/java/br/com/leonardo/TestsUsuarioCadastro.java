@@ -12,18 +12,20 @@ import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.web.server.LocalServerPort;
 import org.springframework.http.HttpStatus;
+import org.springframework.test.annotation.DirtiesContext;
 
 import com.github.javafaker.Faker;
 
 import br.com.leonardo.api.handler.Error;
-import br.com.leonardo.domain.usuario.Usuario;
+import br.com.leonardo.api.representation.model.UsuarioDTO;
 import br.com.leonardo.domain.usuario.UsuarioRepository;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
 @SpringBootTest(webEnvironment = WebEnvironment.RANDOM_PORT)
+@DirtiesContext(classMode = DirtiesContext.ClassMode.BEFORE_CLASS)
 public class TestsUsuarioCadastro {
-
+  
   @Autowired
   private TestRestTemplate restTemplate;
 
@@ -45,7 +47,7 @@ public class TestsUsuarioCadastro {
   }
 
   private void deveValidarCampoNomeTamanhoUsuarioCadastro() {
-    var usuario = new Usuario();
+    var usuario = new UsuarioDTO();
     usuario.setNome(StringUtils.leftPad("0", 61));
     var response = restTemplate.postForEntity(getPath(), usuario, Error.class);
     assertNotNull(response);
@@ -58,7 +60,7 @@ public class TestsUsuarioCadastro {
   }
 
   private void deveValidarCampoEmailUsuarioCadastro() {
-    var usuario = new Usuario();
+    var usuario = new UsuarioDTO();
     usuario.setEmail("emailinvalido");
     var response = restTemplate.postForEntity(getPath(), usuario, Error.class);
     assertNotNull(response);
@@ -70,7 +72,7 @@ public class TestsUsuarioCadastro {
   }
 
   private void deveValidarCamposObrigatorios() {
-    var response = restTemplate.postForEntity(getPath(), new Usuario(), Error.class);
+    var response = restTemplate.postForEntity(getPath(), new UsuarioDTO(), Error.class);
     assertNotNull(response);
     assertNotNull(response.getBody());
     assertEquals(response.getBody().getStatus(), HttpStatus.BAD_REQUEST);
@@ -81,10 +83,10 @@ public class TestsUsuarioCadastro {
   @Test
   void deveCadastrarNovoUsuario() {
     Faker faker = new Faker();
-    var usuario = new Usuario();
+    var usuario = new UsuarioDTO();
     usuario.setEmail(faker.internet().emailAddress());
     usuario.setNome(faker.funnyName().name());
-    var response = restTemplate.postForEntity(getPath(), usuario, Usuario.class);
+    var response = restTemplate.postForEntity(getPath(), usuario, UsuarioDTO.class);
     assertNotNull(response);
     assertNotNull(response.getBody());
     assertNotNull(response.getBody().getId());
@@ -95,7 +97,7 @@ public class TestsUsuarioCadastro {
     final var usuario = usuarioRepository.findByEmail("teste0001@teste.com").get();
 
     Faker faker = new Faker();
-    var usuarioInvalido = new Usuario();
+    var usuarioInvalido = new UsuarioDTO();
     usuarioInvalido.setEmail(usuario.getEmail());
     usuarioInvalido.setNome(faker.funnyName().name());
     var responseInvalid = restTemplate.postForEntity(getPath(), usuarioInvalido, Error.class);

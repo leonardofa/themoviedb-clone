@@ -9,11 +9,10 @@ import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
 
-
 @Data
 @EqualsAndHashCode(callSuper = false)
-public class UsuarioDTO extends BaseDTO{
-
+public class UsuarioDTO extends BaseDTO {
+  
   @ApiModelProperty(value = "Nome do usuário")
   @NotBlank
   @Size(min = 3, max = 60)
@@ -22,7 +21,7 @@ public class UsuarioDTO extends BaseDTO{
   @ApiModelProperty(value = "Email do usuário")
   @NotBlank
   @Email
-  @Size(min = 3, max = 255)
+  @Size(min = 3, max = 128)
   private String email;
 
 }
