@@ -9,6 +9,7 @@
 * Testes
 
 ### 2. Techs e stacks a serem usadas:
+* Maven
 * Repositório Git
 * Banco de Dev e Teste. Console H2 habilitado. Item 4.1
 * Modelo relacional. Item 4.2
